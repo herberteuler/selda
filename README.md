@@ -111,6 +111,46 @@ sudo docker-compose -f pgtest-compose.yml down
 ```
 
 
+Building and Testing with Nix
+-----------------------------
+
+It is recommended to use Stack on [NixOS](https://nixos.org) or systems
+with Nix installed for development. The support for Nix has been added to
+`stack.yaml`, however, to also allow usage from systems without Nix, it
+is not enabled by default.
+
+To build all packages with Nix support:
+
+    $ stack --nix build
+
+This will take care of dependencies for you.
+
+To build with another resolver, e.g. for another version of GHC (change
+`18.24` to whatever suitable):
+
+    $ stack --nix --resolver 18.24 build
+
+If you need settings from your host environment, e.g. proxies for Stack,
+disable purity:
+
+    $ stack --nix --no-nix-pure build
+
+To enable a specific flag for a package:
+
+    $ stack --nix build --flag selda-sqlite:haste
+
+To run tests:
+
+    $ stack --nix test
+
+To test with a specific flag:
+
+    $ stack --nix test --flag selda-tests:postgres
+
+Note that to run the above tests, a PostgreSQL environment should be
+set up as stated in [here](#PostgreSQL-backend-testing-with-Docker).
+
+
 TODOs
 -----
 
