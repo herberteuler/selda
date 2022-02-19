@@ -51,7 +51,7 @@ withSQLite :: (MonadIO m, MonadMask m) => FilePath -> SeldaT SQLite m a -> m a
 #ifdef __HASTE__
 withSQLite _ _ = return $ error "withSQLite called in JS context"
 
-sqliteBackend :: a -> SeldaBackend
+sqliteBackend :: a -> SeldaBackend SQLite
 sqliteBackend _ = error "sqliteBackend called in JS context"
 #else
 withSQLite file m = bracket (sqliteOpen file) seldaClose (runSeldaT m)
