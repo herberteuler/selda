@@ -90,7 +90,8 @@ issues tagged [good first issue](https://github.com/valderman/selda/issues?q=is%
 Setting up the build environment
 --------------------------------
 
-From the repository root:
+If you are using Nix, see [the later section](#building-and-testing-with-nix).
+Otherwise, from the repository root:
 
 * Install `libpq-dev` from your package manager.
     This is required to build the PostgreSQL backend.
@@ -148,7 +149,7 @@ To test with a specific flag:
     $ stack --nix test --flag selda-tests:postgres
 
 Note that to run the above tests, a PostgreSQL environment should be
-set up as stated in [here](#PostgreSQL-backend-testing-with-Docker).
+set up as stated [here](#PostgreSQL-backend-testing-with-Docker).
 
 
 TODOs
