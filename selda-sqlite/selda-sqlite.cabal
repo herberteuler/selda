@@ -15,6 +15,10 @@ flag haste
   default: False
   description: Package is being installed for Haste.
 
+flag json
+  default: False
+  description: Enable JSON support
+
 library
   exposed-modules:
     Database.Selda.SQLite
@@ -37,6 +41,10 @@ library
       , uuid-types    >=1.0   && <1.1
   else
     cpp-options: -D__HASTE__
+  if flag(json)
+    build-depends:
+        selda-json
+    cpp-options: -D__JSON__
   hs-source-dirs:
     src
   default-language:

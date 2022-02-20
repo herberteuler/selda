@@ -21,6 +21,12 @@ import Data.Time (FormatTime, formatTime, defaultTimeLocale)
 import Data.UUID.Types (toByteString)
 import Database.SQLite3
 import System.Directory (makeAbsolute)
+
+#ifdef __JSON__
+import Database.Selda.JSON
+import Database.Selda.Unsafe
+#endif
+
 #endif
 
 data SQLite
@@ -232,4 +238,10 @@ fromSqlData SQLNull        = SqlNull
 
 fmtTime :: FormatTime t => String -> t -> String
 fmtTime = formatTime defaultTimeLocale
+#endif
+
+#ifdef __JSON__
+instance JSONBackend SQLite where
+  (~>) = operator "->"
+  jsonToText = cast
 #endif

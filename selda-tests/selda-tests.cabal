@@ -1,3 +1,4 @@
+cabal-version:       2.2
 name:                selda-tests
 version:             0.1.0.0
 synopsis:            Tests for the Selda database DSL.
@@ -7,7 +8,12 @@ author:              Anton Ekblad
 maintainer:          anton@ekblad.cc
 category:            Database
 build-type:          Simple
-cabal-version:       >=1.10
+
+flag json
+  default: False
+  description: Enable JSON for the SQLite backend. This will select SQLite
+               and deselect PostgreSQL. It also requires that selda-sqlite
+               is built with the `json` flag enabled.
 
 flag postgres
   default: False
@@ -42,9 +48,12 @@ test-suite selda-testsuite
     , selda-json
     , text       >=1.1  && <1.3
     , time       >=1.4  && <1.10
-    , random     >=1.1  && <1.2
+    , random     >=1.2  && <1.3
     , uuid-types >=1.0  && <1.1
-  if flag(postgres)
+  if flag(json)
+    build-depends: selda-sqlite
+    cpp-options: -DSQLITE -DBACKEND=SQLite -DTEST_JSON
+  elif flag(postgres)
     other-modules: PGConnectInfo, Tests.PGConnectionString
     build-depends: selda-postgresql
     cpp-options:   -DPOSTGRES -DTEST_JSON -DBACKEND=PG

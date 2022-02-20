@@ -45,7 +45,9 @@ packages:
 # Dependency packages to be pulled from upstream that are not in the resolver
 # (e.g., acme-missiles-0.3)
 extra-deps:
-  - random-1.1
+  - git: https://github.com/herberteuler/direct-sqlite.git
+    commit: 92dbe791a9b457e3531853e234bf9761780119f9
+  - random-1.2.1
 # Override default flag values for local packages and extra-deps
 # flags: {}
 
@@ -74,4 +76,4 @@ extra-deps:
 nix:
   enable: false
   pure: true
-  packages: [ libpqxx postgresql sqlite ]
+  packages: [ libpqxx postgresql sqlite zlib ]

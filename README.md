@@ -95,7 +95,8 @@ Otherwise, from the repository root:
 
 * Install `libpq-dev` from your package manager.
     This is required to build the PostgreSQL backend.
-* Make sure you're running a cabal version that supports v2-style commands.
+* Make sure you're running a cabal version that supports v2-style commands
+  and Cabal specification 2.2.
 * Familiarise yourself with the various targets in the makefile.
     The dependencies between Selda, the backends and the tests are slightly
     complex, so straight-up cabal is too quirky for day to day hacking.
